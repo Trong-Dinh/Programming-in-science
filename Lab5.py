@@ -1,43 +1,41 @@
-# Example for n = 5:
-# *****
-# *   *
-# *   *
-# *   *
-# *****
-def hollow_square(n):
-    if n == 1:
-        return "*"
-    
-    middle = ("*" + " " * (n - 2) + "*\n") * (n - 2)
-    square = "*" * n + "\n" + middle + "*" * n
-    return square
+def main():
+    d1 = 6
+    d2 = 8
+    k = (d1 + d2) % 4 + 2
+    shift = d1 - d2
+    rows_keep = (d1 % 2) + 2
 
-# 1
-# 12
-# 123
-# 1234
-def number_pattern(n):
-    result = ""
-    row = ""
-    for num in range(1, n+1):
-        row += str(num)
-        result += row + "\n"
+    n = int(input("How many readings? "))
 
-    return result.strip()
+    # Get input number n times
+    readings = [float(input("Enter reading: ")) for i in range(n)]
 
-# Example: For n = 5, sum = 1 + 2 + 3 + 4 + 5 = 15
-def sum_of_natural_numbers(n):
-    sum = n*(n+1)/2
-    return sum
+    # Full list
+    print("Full list:", readings)
 
-# Example for n = 4:
-#    *
-#   ***
-#  *****
-# *******
-def centered_star_pyramid(n):
-    result = ""
-    for num in range(1, n+1):
-        result += " " * (n - num) + "*" * (num * 2 - 1) + "\n"
+    if len(readings) > 0:
+        print("First reading:", readings[0])
+        print("Last reading:", readings[-1])
+    else:
+        print("The list is empty.")
 
-    return result.rstrip()
+    if len(readings) >= 4:
+        print("Slice from index 1 to index 3:", readings[1:4])
+    else:
+        print("Not enough values for slice [1:4].")
+
+    total = sum(readings)
+    print("Sum of readings:", total)
+
+    # Component B
+    shifted = [x + shift for x in readings]
+    scaled = [x * k for x in readings]
+    zipped_sum = [a + b for a, b in zip(readings, shifted)]
+
+    print("Shifted readings:", shifted)
+    print("Scaled readings:", scaled)
+    print("Element-wise sum of original and shifted:", zipped_sum)
+
+
+if __name__ == "__main__":
+    main()
